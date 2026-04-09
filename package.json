@@ -1,0 +1,85 @@
+{
+  "name": "hosts-utilities",
+  "version": "0.1.0",
+  "description": "Utilities for the hosts file",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test-lite": "mocha --recursive test/cases",
+    "test-one": "mocha",
+    "coverage": "c8 --all pnpm test-lite",
+    "coverage-check": "c8 --check-coverage --100 pnpm test-lite",
+    "prettier-check": "prettier --check --ignore-unknown ."
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.mjs",
+      "types": "./types/index.d.ts"
+    },
+    "./internals/*": null,
+    "./*": {
+      "import": "./src/*.mjs",
+      "types": "./types/*.d.ts"
+    }
+  },
+  "imports": {
+    "#src/*": "./src/*.mjs",
+    "#test/*": "./test/*.mjs"
+  },
+  "keywords": [
+    "hosts",
+    "hostility"
+  ],
+  "author": "Phil Olson <philip.olson@pm.me>",
+  "license": "SEE LICENSE IN license.txt",
+  "packageManager": "pnpm@10.31.0",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "c8": "^11.0.0",
+    "chai": "^6.2.2",
+    "chai-deep-match": "^1.2.1",
+    "dedent": "^1.7.2",
+    "eslint": "^10.2.0",
+    "eslint-plugin-import-x": "^4.16.2",
+    "fibble": "^1.2.3",
+    "globals": "^17.4.0",
+    "mocha": "^11.7.5",
+    "monocart-coverage-reports": "^2.12.9",
+    "prettier": "^3.8.1",
+    "typescript": "^6.0.2"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "overrides": [
+      {
+        "files": [
+          "**/*.jsonc"
+        ],
+        "options": {
+          "trailingComma": "none"
+        }
+      }
+    ]
+  },
+  "mocha": {
+    "node-option": [
+      "experimental-import-meta-resolve",
+      "import=fibble/register"
+    ],
+    "require": "test/init.mjs"
+  },
+  "c8": {
+    "include": [
+      "src/**/*.mjs"
+    ],
+    "exclude": [
+      "src/hosts-path.mjs",
+      "src/internals/fp-utils.mjs",
+      "src/internals/utils.mjs"
+    ],
+    "experimental-monocart": true
+  }
+}
