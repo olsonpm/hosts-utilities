@@ -7,6 +7,7 @@
   "scripts": {
     "test-full": "sh ./scripts/test-full.sh",
     "test-lite": "mocha --recursive test/cases",
+    "test": "pnpm test-lite",
     "test-one": "mocha",
     "coverage": "c8 --all pnpm test-lite",
     "coverage-check": "c8 --check-coverage --100 pnpm test-lite",
