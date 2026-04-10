@@ -1,11 +1,21 @@
+import * as z from 'zod'
 import * as fp from './internals/fp-utils.mjs'
 import { isHostname, isSpace } from './internals/utils.mjs'
 import { isEmpty } from './internals/fp-utils.mjs'
+import {
+  ladenString,
+  partialObject,
+  sharedSchema,
+  validate,
+} from './internals/schema-utils.mjs'
 import hostsPath from './hosts-path.mjs'
 import parse from './parse.mjs'
 import write from './write.mjs'
 
 const remove = async (ip, hostnames, options = {}) => {
+  const argsObj = { ip, hostnames, options }
+  validate(argsObj, getArgsSchema)
+
   const { filePath = hostsPath, ...formatOptions } = options
   const parsedLines = await parse({ filePath })
 
@@ -82,6 +92,17 @@ function removeAdjacentSpaces(hostnamesWithSpace) {
   }
 
   return result
+}
+
+function getArgsSchema() {
+  return z.object({
+    ip: ladenString(),
+    hostnames: z.array(ladenString()),
+    options: partialObject({
+      filePath: ladenString(),
+      ...sharedSchema.formatOptions(),
+    }),
+  })
 }
 
 export default remove

@@ -1,10 +1,20 @@
+import * as z from 'zod'
 import * as fp from './internals/fp-utils.mjs'
 import { isHostname } from './internals/utils.mjs'
+import {
+  ladenString,
+  partialObject,
+  sharedSchema,
+  validate,
+} from './internals/schema-utils.mjs'
 import hostsPath from './hosts-path.mjs'
 import parse from './parse.mjs'
 import write from './write.mjs'
 
 const upsert = async (ip, hostnames, options = {}) => {
+  const argsObj = { ip, hostnames, options }
+  validate(argsObj, getArgsSchema)
+
   const {
     filePath = hostsPath,
     upsertComment = fp.returnFirstArg,
@@ -55,6 +65,18 @@ function toAllHostnames(arr) {
     allHostnames.push(...parsedHostnames)
     return allHostnames
   }, [])
+}
+
+function getArgsSchema() {
+  return z.object({
+    ip: ladenString(),
+    hostnames: z.array(ladenString()),
+    options: partialObject({
+      filePath: ladenString(),
+      upsertComment: z.function(),
+      ...sharedSchema.formatOptions(),
+    }),
+  })
 }
 
 export default upsert

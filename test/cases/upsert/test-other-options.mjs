@@ -20,7 +20,7 @@ const testOtherOptions = () => {
       fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n', '1.2.3.4 hostname1\n']
       const options = {
         upsertComment: () => '',
-        rest: 'of options',
+        preserveFormatting: true,
       }
       await upsert('1.2.3.4', ['hostname2'], options)
       await upsert('1.2.3.4', ['hostname2'], {
@@ -48,8 +48,8 @@ const testOtherOptions = () => {
         },
       ]
       expect(write.argsPerCall).to.deep.equal([
-        [parsedLines, { filePath: hostsPath, rest: 'of options' }],
-        [parsedLines, { filePath: 'some/path', rest: 'of options' }],
+        [parsedLines, { filePath: hostsPath, preserveFormatting: true }],
+        [parsedLines, { filePath: 'some/path', preserveFormatting: true }],
       ])
     })
 

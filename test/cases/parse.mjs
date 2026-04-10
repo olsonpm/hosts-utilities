@@ -8,6 +8,21 @@ import parse from '#src/parse'
 const mockFile = getMockFiles()
 
 describe('parse', () => {
+  it('validates the arguments', async () => {
+    const expectedMsg = dedent(`
+      Arguments failed the schema
+      ✖ Unrecognized key: "invalid"
+        → at options
+      ✖ Invalid input: expected string, received number
+        → at options.filePath
+    `)
+    const result = parse({ filePath: 1, invalid: true })
+
+    await expect(result)
+      .to.be.rejectedWith(expectedMsg)
+      .and.eventually.have.property('cause')
+  })
+
   it('reads the correct file', async () => {
     fs.readFile.resultPerCall = [mockFile.minimal, mockFile.minimal]
     await parse()
@@ -17,6 +32,7 @@ describe('parse', () => {
       ['some/path/to/file', 'utf8'],
     ])
   })
+
   it('calls parseLine as expected', async () => {
     fs.readFile.resultPerCall = [mockFile.minimal]
     await parse()

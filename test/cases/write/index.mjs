@@ -5,8 +5,11 @@ import { spaces } from '#test/utils/index'
 import hostsPath from '#src/hosts-path'
 import write from '#src/write'
 import { eol } from '#src/internals/utils'
+import testValidatesInput from './test-validates-input.mjs'
 
 describe('write', () => {
+  testValidatesInput()
+
   it('writes to the correct file', async () => {
     const parsedLines = []
     await write(parsedLines)
@@ -21,7 +24,7 @@ describe('write', () => {
   it('calls toStringLine as expected', async () => {
     const options = {
       filePath: 'some/path',
-      everything: 'but filePath is passed',
+      preserveFormatting: true,
     }
     const parsedLines = [
       {
@@ -32,7 +35,7 @@ describe('write', () => {
     await write(parsedLines, options)
 
     expect(toStringLine.argsPerCall).to.deep.equal([
-      [parsedLines[0], { everything: 'but filePath is passed' }],
+      [parsedLines[0], { preserveFormatting: true }],
     ])
   })
 

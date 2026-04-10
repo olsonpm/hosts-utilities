@@ -20,9 +20,9 @@ const testOptions = () => {
         '1.2.3.4 hostname1 hostname2\n',
         '1.2.3.4 hostname1 hostname2\n',
       ]
-      await remove('1.2.3.4', ['hostname2'], { rest: 'of options' })
+      await remove('1.2.3.4', ['hostname2'], { preserveFormatting: true })
       await remove('1.2.3.4', ['hostname2'], {
-        rest: 'of options',
+        preserveFormatting: true,
         filePath: 'some/path',
       })
 
@@ -46,8 +46,8 @@ const testOptions = () => {
         },
       ]
       expect(write.argsPerCall).to.deep.equal([
-        [parsedLines, { filePath: hostsPath, rest: 'of options' }],
-        [parsedLines, { filePath: 'some/path', rest: 'of options' }],
+        [parsedLines, { filePath: hostsPath, preserveFormatting: true }],
+        [parsedLines, { filePath: 'some/path', preserveFormatting: true }],
       ])
     })
   })
