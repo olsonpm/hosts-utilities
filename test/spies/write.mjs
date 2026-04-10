@@ -1,7 +1,7 @@
 import { replace } from 'fibble'
 import { spy } from '../utils/index.mjs'
-// write-file needs to be mocked before write
-import './write-file.mjs'
+// fs needs to be mocked before write
+import './fs.mjs'
 
 const { default: write } = await import('#src/write')
 

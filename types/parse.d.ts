@@ -1,3 +1,7 @@
-import type { ParseFile } from './common.ts'
+import type { ParsedLine } from './common.ts'
 
-export default function (): ReturnType<ParseFile>
+type Options = {
+  filePath?: string
+}
+
+export default function (options: Options): Promise<ParsedLine[]>

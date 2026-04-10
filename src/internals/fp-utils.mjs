@@ -3,7 +3,11 @@
  *   keep the package small and avoid a dependency
  */
 
+const any = predicate => arr => arr.some(predicate)
+
 const appendAll = appended => base => base.concat(appended)
+
+const compose = fnArr => val => fnArr.reduce((res, fn) => fn(res), val)
 
 const containedIn = arr => {
   const valuesToCheck = new Set(arr)
@@ -13,6 +17,8 @@ const containedIn = arr => {
 const discardWhen = predicate => arr => arr.filter(negate(predicate))
 
 const findLast = predicate => arr => arr.findLast(predicate)
+
+const get = key => obj => obj[key]
 
 // common-fp uses type-detect to determine types.  We're only using this
 // internally, so we can ignore edge cases
@@ -38,6 +44,8 @@ const negate =
   (...args) =>
     !fn(...args)
 
+const none = predicate => arr => arr.every(negate(predicate))
+
 const passThrough = (val, fnArr) =>
   fnArr.reduce((result, fn) => fn(result), val)
 
@@ -46,15 +54,19 @@ const returnFirstArg = arg => arg
 const split = separator => str => str.split(separator)
 
 export {
+  any,
   appendAll,
+  compose,
   containedIn,
   discardWhen,
   findLast,
+  get,
   isEmpty,
   keepWhen,
   mapValues,
   mUpdate,
   negate,
+  none,
   passThrough,
   returnFirstArg,
   split,

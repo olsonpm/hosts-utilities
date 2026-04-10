@@ -1,10 +1,11 @@
-import type { ParsedLine, FormatOptions } from './common.ts'
+import type { FormatOptions } from './common.js'
 
 type Options = FormatOptions & {
   filePath?: string
 }
 
 export default function (
-  parsedLines: ParsedLine[],
+  ip: string,
+  hostnames: string[],
   options: Options
 ): Promise<void>

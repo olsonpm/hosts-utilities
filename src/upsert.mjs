@@ -1,12 +1,16 @@
 import * as fp from './internals/fp-utils.mjs'
 import { isHostname } from './internals/utils.mjs'
 import hostsPath from './hosts-path.mjs'
-import parseFile from './parse-file.mjs'
+import parse from './parse.mjs'
 import write from './write.mjs'
 
 const upsert = async (ip, hostnames, options = {}) => {
-  const { filePath = hostsPath, upsertComment = fp.returnFirstArg } = options
-  const parsedLines = await parseFile(filePath)
+  const {
+    filePath = hostsPath,
+    upsertComment = fp.returnFirstArg,
+    ...formatOptions
+  } = options
+  const parsedLines = await parse({ filePath })
 
   const ipMatches = parsed => parsed.data.ip === ip
   const allHostnamesForIp = fp.passThrough(parsedLines, [
@@ -42,7 +46,7 @@ const upsert = async (ip, hostnames, options = {}) => {
     parsedLines.push(appendedEntry)
   }
 
-  await write(parsedLines)
+  await write(parsedLines, { filePath, ...formatOptions })
 }
 
 function toAllHostnames(arr) {

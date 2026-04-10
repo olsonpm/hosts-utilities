@@ -12,18 +12,10 @@ type ParsedLine = {
   }
 }
 
-type ParseFile = (filePath: string) => Promise<ParsedLine[]>
-
-type WriteFile = (
-  filePath: string,
-  parsedLines: ParsedLine[],
-  options: WriteOptions
-) => Promise<void>
-
-type WriteOptions = {
+type FormatOptions = {
   preserveFormatting?: boolean
   separatorParts?: string
   separatorHostname?: string
 }
 
-export type { ParsedLine, ParseFile, WriteFile, WriteOptions }
+export type { ParsedLine, FormatOptions }

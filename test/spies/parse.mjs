@@ -1,7 +1,7 @@
 import { replace } from 'fibble'
 import { spy } from '../utils/index.mjs'
-// parse-file needs to be mocked before parse
-import './parse-file.mjs'
+// fs needs to be mocked before parse
+import './fs.mjs'
 
 const { default: parse } = await import('#src/parse')
 
