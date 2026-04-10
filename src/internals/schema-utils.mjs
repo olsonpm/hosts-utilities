@@ -36,7 +36,7 @@ function formatOptions() {
  * note: zod's prettify sorts on path length instead of path
  */
 function customPrettify(error) {
-  const getStr = el => (el?.path || []).join('.') + '_' + (el?.message || '')
+  const getStr = el => el.path.join('.') + '_' + el.message
   const byPathThenMessage = (l, r) => getStr(l).localeCompare(getStr(r))
 
   const lines = []
@@ -44,13 +44,14 @@ function customPrettify(error) {
 
   for (const issue of issues) {
     lines.push(`✖ ${issue.message}`)
-    if (issue.path?.length) lines.push(`  → at ${toDotPath(issue.path)}`)
+    lines.push(`  → at ${toDotPath(issue.path)}`)
   }
 
   // Convert Map to formatted string
   return lines.join('\n')
 }
 
+/* c8 ignore start */
 /**
  * this is copied from zod
  */
@@ -70,6 +71,7 @@ function toDotPath(_path) {
 
   return segs.join('')
 }
+/* c8 ignore stop */
 
 function parsedLines() {
   const oneParsedLine = partialObject({
