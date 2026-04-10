@@ -5,12 +5,13 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test-full": "nve 20.6.0,20,22,24 pnpm test-lite",
+    "test-full": "sh ./scripts/test-full.sh",
     "test-lite": "mocha --recursive test/cases",
     "test-one": "mocha",
     "coverage": "c8 --all pnpm test-lite",
     "coverage-check": "c8 --check-coverage --100 pnpm test-lite",
-    "prettier-check": "prettier --check --ignore-unknown ."
+    "prettier-check": "prettier --check --ignore-unknown .",
+    "validate": "sh ./scripts/validate.sh"
   },
   "exports": {
     ".": {
