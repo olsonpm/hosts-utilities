@@ -26,12 +26,6 @@ describe('write-file', () => {
     expect(fs.writeFile.argsPerCall).to.deep.equal([['some/path/to/file', '']])
   })
 
-  /**
-   * note: these tests overlap with toStringLine.  Down the road maybe I'll
-   *   simplify these tests to assert the joined results of toStringLine.  For
-   *   now, this feels safer.
-   */
-
   it('writes a minimal file', async () => {
     const parsedLines = [
       {
