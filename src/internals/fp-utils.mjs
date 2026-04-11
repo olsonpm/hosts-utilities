@@ -26,6 +26,11 @@ const isEmpty = coll => {
   return Array.isArray(coll) ? !coll.length : !Object.keys(coll).length
 }
 
+// "laden" is my positive form of "non-empty"
+const isLaden = coll => {
+  return Array.isArray(coll) ? !!coll.length : !!Object.keys(coll).length
+}
+
 const keepWhen = predicate => arr => arr.filter(predicate)
 
 const mapValues = fn => arr => arr.map(fn)
@@ -62,6 +67,7 @@ export {
   findLast,
   get,
   isEmpty,
+  isLaden,
   keepWhen,
   mapValues,
   mUpdate,

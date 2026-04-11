@@ -2,19 +2,19 @@ import { expect } from 'chai'
 import dedent from 'dedent'
 import { fs } from '#test/spies/index'
 import hostsPath from '#src/hosts-path'
-import remove from '#src/remove'
+import removeHostnames from '#src/remove-hostnames'
 import testRemoves from './test-removes.mjs'
 import testDoesNothing from './test-does-nothing.mjs'
 import testOptions from './test-options.mjs'
 
-describe('remove', () => {
+describe('remove-hostnames', () => {
   testRemoves()
   testDoesNothing()
   testOptions()
 
   it('leaves comments as-is', async () => {
     fs.readFile.resultPerCall = ['1.2.3.4 hostname1 hostname2 #some comment\n']
-    await remove('1.2.3.4', ['hostname1'])
+    await removeHostnames(['hostname1'])
 
     const expectedContent = '1.2.3.4 hostname2 #some comment\n'
 
@@ -28,8 +28,6 @@ describe('remove', () => {
       Arguments failed the schema
       ✖ Invalid input: expected array, received number
         → at hostnames
-      ✖ Invalid input: expected string, received number
-        → at ip
       ✖ Unrecognized key: "invalid"
         → at options
       ✖ Invalid input: expected string, received number
@@ -40,9 +38,12 @@ describe('remove', () => {
         → at options.separatorHostname
       ✖ Invalid input: expected string, received number
         → at options.separatorParts
+      ✖ Invalid input: expected string, received number
+        → at options.withIp
     `)
-    const result = remove(1, 2, {
-      filePath: 3,
+    const result = removeHostnames(1, {
+      filePath: 2,
+      withIp: 3,
       preserveFormatting: 4,
       separatorParts: 5,
       separatorHostname: 6,

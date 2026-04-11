@@ -1,5 +1,5 @@
 export { default as hostsPath } from './hosts-path.mjs'
 export { default as parse } from './parse.mjs'
-export { default as remove } from './remove.mjs'
+export { default as removeHostnames } from './remove-hostnames.mjs'
 export { default as upsert } from './upsert.mjs'
 export { default as write } from './write.mjs'

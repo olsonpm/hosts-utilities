@@ -1,14 +1,14 @@
 import { expect } from 'chai'
 import { fs, parse, write } from '#test/spies/index'
 import hostsPath from '#src/hosts-path'
-import remove from '#src/remove'
+import removeHostnames from '#src/remove-hostnames'
 
 const testOptions = () => {
   context('options', () => {
     it('calls parse with the right file path', async () => {
       fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n', '1.2.3.4 hostname1\n']
-      await remove('1.2.3.4', ['hostname1'])
-      await remove('1.2.3.4', ['hostname1'], { filePath: 'some/path' })
+      await removeHostnames(['hostname1'])
+      await removeHostnames(['hostname1'], { filePath: 'some/path' })
       expect(parse.argsPerCall).to.deep.equal([
         [{ filePath: hostsPath }],
         [{ filePath: 'some/path' }],
@@ -20,8 +20,10 @@ const testOptions = () => {
         '1.2.3.4 hostname1 hostname2\n',
         '1.2.3.4 hostname1 hostname2\n',
       ]
-      await remove('1.2.3.4', ['hostname2'], { preserveFormatting: true })
-      await remove('1.2.3.4', ['hostname2'], {
+      await removeHostnames(['hostname2'], {
+        preserveFormatting: true,
+      })
+      await removeHostnames(['hostname2'], {
         preserveFormatting: true,
         filePath: 'some/path',
       })

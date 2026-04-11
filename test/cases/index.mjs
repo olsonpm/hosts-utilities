@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import * as hostsUtilities from '#src/index'
 import hostsPath from '#src/hosts-path'
 import parse from '#src/parse'
-import remove from '#src/remove'
+import removeHostnames from '#src/remove-hostnames'
 import upsert from '#src/upsert'
 import write from '#src/write'
 
@@ -11,7 +11,7 @@ describe('index', () => {
     expect(hostsUtilities).to.deep.match({
       hostsPath,
       parse,
-      remove,
+      removeHostnames,
       upsert,
       write,
     })

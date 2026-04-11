@@ -12,20 +12,22 @@ import hostsPath from './hosts-path.mjs'
 import parse from './parse.mjs'
 import write from './write.mjs'
 
-const remove = async (ip, hostnames, options = {}) => {
-  const argsObj = { ip, hostnames, options }
+const removeHostnames = async (hostnames, options = {}) => {
+  const argsObj = { hostnames, options }
   validate(argsObj, getArgsSchema)
 
-  const { filePath = hostsPath, ...formatOptions } = options
+  const { filePath = hostsPath, withIp, ...formatOptions } = options
   const parsedLines = await parse({ filePath })
 
+  const ipMatches = withIp ? data => data.ip === withIp : () => true
   const hostnameMatches = fp.containedIn(hostnames)
   const anyHostnameMatches = fp.any(hostnameMatches)
   const dataMatches = data => {
-    return data.ip === ip && anyHostnameMatches(data.hostnamesWithSpace)
+    return ipMatches(data) && anyHostnameMatches(data.hostnamesWithSpace)
   }
   const hasNothingToRemove = fp.compose([
     fp.mapValues(fp.get('data')),
+    fp.keepWhen(fp.isLaden),
     fp.none(dataMatches),
   ])
   if (hasNothingToRemove(parsedLines)) {
@@ -96,13 +98,13 @@ function removeAdjacentSpaces(hostnamesWithSpace) {
 
 function getArgsSchema() {
   return z.object({
-    ip: ladenString(),
     hostnames: z.array(ladenString()),
     options: partialObject({
       filePath: ladenString(),
+      withIp: ladenString(),
       ...sharedSchema.formatOptions(),
     }),
   })
 }
 
-export default remove
+export default removeHostnames
