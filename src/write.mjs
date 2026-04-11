@@ -18,12 +18,23 @@ const write = async (parsedLines, options = {}) => {
   let content = parsedLines
     .map(parsed => toStringLine(parsed, formatOptions))
     .join(eol)
-  content = ensureLadenFileEndsWith(eol, content)
-  await fsp.writeFile(filePath, content)
+  content = ensureLadenStringEndsWith(eol, content)
+  try {
+    await fsp.writeFile(filePath, content)
+  } catch (err) {
+    if (err.code === 'EACCES') {
+      // I'm only writing this wrapper error because permissions errors will
+      // probably happen a lot and the native error language reads poorly
+      throw new Error(`You don't have permissions to write to ${filePath}`, {
+        cause: err,
+      })
+    }
+    throw err
+  }
 }
 
 // 'laden' is my attempt at a positive 'non-empty' - to avoid double negatives
-function ensureLadenFileEndsWith(suffix, str) {
+function ensureLadenStringEndsWith(suffix, str) {
   if (!str) return ''
 
   return str.endsWith(suffix) ? str : str + suffix

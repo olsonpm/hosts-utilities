@@ -5,7 +5,9 @@ export default fn => {
     let result
     if (mockFn.resultPerCall.length) result = mockFn.resultPerCall.shift()
     else if (Object.hasOwn(mockFn, 'return')) result = mockFn.return
-    else result = fn.apply(this, args)
+    else if (Object.hasOwn(mockFn, 'fnOverride')) {
+      result = mockFn.fnOverride(...args)
+    } else result = fn.apply(this, args)
 
     const lastCall = { args, result }
     mockFn.calls.push(lastCall)
@@ -22,6 +24,7 @@ export default fn => {
     })
     delete mockFn.return
     delete mockFn.lastCall
+    delete mockFn.fnOverride
   }
 
   return Object.assign(mockFn, {
