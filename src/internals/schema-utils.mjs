@@ -47,13 +47,12 @@ function customPrettify(error) {
     lines.push(`  → at ${toDotPath(issue.path)}`)
   }
 
-  // Convert Map to formatted string
   return lines.join('\n')
 }
 
 /* c8 ignore start */
 /**
- * this is copied from zod
+ * this is copied from zod, no need to test
  */
 function toDotPath(_path) {
   const segs = []
