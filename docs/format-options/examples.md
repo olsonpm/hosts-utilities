@@ -32,11 +32,11 @@ await assignHostnames('1.2.3.4', ['hostname1'])
 
 to insert a space instead of a tab for new host entries:
 
-````js
+```js
 await assignHostnames('5.6.7.8', ['hostname2'], { separatorParts: ' ' })
 // adds the line
 // 5.6.7.8{space}hostname2
-
+```
 
 <a name="preserve-separatorhostname"></a>
 
@@ -46,7 +46,7 @@ Given a hosts file
 
 ```txt
 1.2.3.4 hostname1{tab}hostname2
-````
+```
 
 ```js
 await assignHostnames('1.2.3.4', ['hostname3'])
