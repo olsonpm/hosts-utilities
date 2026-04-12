@@ -175,7 +175,7 @@ await assignHostnames('1.2.3.4', ['hostname1', 'hostname3'])
 
 await assignHostnames('5.6.7.8', ['hostname4'])
 // adds the line
-// 5.6.7.8{tab}hostname4
+// 5.6.7.8 hostname4
 ```
 
 ### write
