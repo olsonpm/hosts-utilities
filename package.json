@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/olsonpm/hosts-utilities",
   "files": [
-    "src"
+    "src",
+    "types"
   ],
   "exports": {
     ".": {
