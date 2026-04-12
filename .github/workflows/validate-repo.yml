@@ -20,4 +20,4 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - uses: ./.github/actions/nve-cache
-      - run: pnpm install && pnpm validate
+      - run: pnpm install --frozen-lockfile && pnpm validate
