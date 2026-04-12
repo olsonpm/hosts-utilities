@@ -217,7 +217,7 @@ await write(updatedLines)
 
 ### Remove Hostnames Options
 
-> [!WARN]
+> [!warning]
 > The option `withIp` is provided because [Hostile supports it][hostile-supports-remove-by-ip],
 > meaning I assume someone found it helpful. Keep in mind hosts shouldn't be
 > mapped to more than one IP address, so `withIp` should be unnecessary.

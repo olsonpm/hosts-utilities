@@ -110,8 +110,6 @@ Given a hosts file
 5.6.7.8{tab}hostname2{tab}hostname3
 ```
 
-_Note the default separatorHostname is used to separate the hostnames_
-
 ```js
 await assignHostnames('5.6.7.8', ['hostname4'], {
   preserveWhitespace: false,
