@@ -18,5 +18,3 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm publish --tag beta
-        env:
-          NPM_CONFIG_PROVENANCE: true
