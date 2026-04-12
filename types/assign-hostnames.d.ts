@@ -7,5 +7,5 @@ type Options = FormatOptions & {
 export default function (
   ip: string,
   hostnames: string[],
-  options: Options
+  options?: Options
 ): Promise<void>

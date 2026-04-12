@@ -6,5 +6,5 @@ type Options = FormatOptions & {
 
 export default function (
   parsedLines: ParsedLineInput[],
-  options: Options
+  options?: Options
 ): Promise<void>

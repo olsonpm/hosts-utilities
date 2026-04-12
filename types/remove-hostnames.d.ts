@@ -5,4 +5,4 @@ type Options = FormatOptions & {
   withIp?: string
 }
 
-export default function (hostnames: string[], options: Options): Promise<void>
+export default function (hostnames: string[], options?: Options): Promise<void>

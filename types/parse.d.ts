@@ -4,4 +4,4 @@ type Options = {
   filePath?: string
 }
 
-export default function (options: Options): Promise<ParsedLineOutput[]>
+export default function (options?: Options): Promise<ParsedLineOutput[]>
