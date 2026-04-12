@@ -3,6 +3,7 @@ import * as fp from './internals/fp-utils.mjs'
 import { isHostname, isSpace } from './internals/utils.mjs'
 import { isEmpty } from './internals/fp-utils.mjs'
 import {
+  ipOrHostname,
   ladenString,
   partialObject,
   sharedSchema,
@@ -98,10 +99,10 @@ function removeAdjacentSpaces(hostnamesWithSpace) {
 
 function getArgsSchema() {
   return z.object({
-    hostnames: z.array(ladenString()),
+    hostnames: z.array(ipOrHostname()),
     options: partialObject({
       filePath: ladenString(),
-      withIp: ladenString(),
+      withIp: ipOrHostname(),
       ...sharedSchema.formatOptions(),
     }),
   })

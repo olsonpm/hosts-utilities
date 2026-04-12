@@ -1,14 +1,14 @@
 import dedent from 'dedent'
 import { expect } from 'chai'
 import { fs } from '#test/spies/index'
-import upsert from '#src/upsert'
+import assignHostnames from '#src/assign-hostnames'
 import hostsPath from '#src/hosts-path'
 
 const testAppends = () => {
   context('appends', () => {
     it('appends hostname to an existing ip', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n']
-      await upsert('1.2.3.4', ['hostname2'])
+      fs.readFile.result = '1.2.3.4 hostname1\n'
+      await assignHostnames('1.2.3.4', ['hostname2'])
 
       const expectedContent = '1.2.3.4 hostname1 hostname2\n'
 
@@ -22,8 +22,8 @@ const testAppends = () => {
         1.2.3.4 hostname1
         1.2.3.4 hostname2
       `)
-      fs.readFile.resultPerCall = [mockHostFile + '\n']
-      await upsert('1.2.3.4', ['hostname3'])
+      fs.readFile.result = mockHostFile + '\n'
+      await assignHostnames('1.2.3.4', ['hostname3'])
 
       const expectedContent = dedent(`
         1.2.3.4 hostname1
@@ -39,8 +39,8 @@ const testAppends = () => {
         1.2.3.4 hostname3
         1.2.3.4 hostname2
       `)
-      fs.readFile.resultPerCall = [mockHostFile + '\n']
-      await upsert('1.2.3.4', ['hostname1', 'hostname3', 'hostname4'])
+      fs.readFile.result = mockHostFile + '\n'
+      await assignHostnames('1.2.3.4', ['hostname1', 'hostname3', 'hostname4'])
 
       const expectedContent = dedent(`
         1.2.3.4 hostname3

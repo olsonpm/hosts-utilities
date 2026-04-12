@@ -1,4 +1,11 @@
 import { EOL as eol } from 'node:os'
+import { assignDefaults } from './fp-utils.mjs'
+
+const getFormatOptions = assignDefaults({
+  preserveFormatting: true,
+  separatorParts: '\t',
+  separatorHostname: ' ',
+})
 
 /**
  * note: this is used to parse hostnamesWithSpace, where it's assumed an element
@@ -9,4 +16,4 @@ const isSpace = str => /\s/.test(str)
 
 const isWindows = process.platform === 'win32'
 
-export { eol, isHostname, isSpace, isWindows }
+export { eol, getFormatOptions, isHostname, isSpace, isWindows }

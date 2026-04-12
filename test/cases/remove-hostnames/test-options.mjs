@@ -6,7 +6,7 @@ import removeHostnames from '#src/remove-hostnames'
 const testOptions = () => {
   context('options', () => {
     it('calls parse with the right file path', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n', '1.2.3.4 hostname1\n']
+      fs.readFile.result = '1.2.3.4 hostname1\n'
       await removeHostnames(['hostname1'])
       await removeHostnames(['hostname1'], { filePath: 'some/path' })
       expect(parse.argsPerCall).to.deep.equal([
@@ -16,10 +16,7 @@ const testOptions = () => {
     })
 
     it('calls write with the correct arguments', async () => {
-      fs.readFile.resultPerCall = [
-        '1.2.3.4 hostname1 hostname2\n',
-        '1.2.3.4 hostname1 hostname2\n',
-      ]
+      fs.readFile.result = '1.2.3.4 hostname1 hostname2\n'
       await removeHostnames(['hostname2'], {
         preserveFormatting: true,
       })
@@ -37,7 +34,7 @@ const testOptions = () => {
             comment: '',
             space: {
               beforeIp: '',
-              beforeHostnames: ' ',
+              afterIp: ' ',
               beforeComment: '',
             },
           },

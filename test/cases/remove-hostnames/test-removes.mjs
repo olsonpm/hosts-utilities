@@ -7,7 +7,7 @@ import removeHostnames from '#src/remove-hostnames'
 const testRemoves = () => {
   context('removes with correct formatting', () => {
     it('removes the first hostname', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1 hostname2 hostname3\n']
+      fs.readFile.result = '1.2.3.4 hostname1 hostname2 hostname3\n'
       await removeHostnames(['hostname1'])
 
       const expectedContent = '1.2.3.4 hostname2 hostname3\n'
@@ -18,7 +18,7 @@ const testRemoves = () => {
     })
 
     it('removes the middle hostname', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1 hostname2 hostname3\n']
+      fs.readFile.result = '1.2.3.4 hostname1 hostname2 hostname3\n'
       await removeHostnames(['hostname2'])
 
       const expectedContent = '1.2.3.4 hostname1 hostname3\n'
@@ -29,7 +29,7 @@ const testRemoves = () => {
     })
 
     it('removes the last hostname', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1 hostname2 hostname3\n']
+      fs.readFile.result = '1.2.3.4 hostname1 hostname2 hostname3\n'
       await removeHostnames(['hostname3'])
 
       const expectedContent = '1.2.3.4 hostname1 hostname2\n'
@@ -40,7 +40,7 @@ const testRemoves = () => {
     })
 
     it('removes the line if there are no more hostnames', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n']
+      fs.readFile.result = '1.2.3.4 hostname1\n'
       await removeHostnames(['hostname1'])
 
       const expectedContent = ''
@@ -55,7 +55,7 @@ const testRemoves = () => {
         1.2.3.4 hostname1
         1.2.3.4 hostname2 hostname3
       `)
-      fs.readFile.resultPerCall = [mockHostFile + '\n']
+      fs.readFile.result = mockHostFile + '\n'
       await removeHostnames(['hostname1', 'hostname2'])
 
       const expectedContent = '1.2.3.4 hostname3\n'
@@ -76,7 +76,7 @@ const testRemoves = () => {
         1.2.3.4 hostname1 hostname2
         5.6.7.8 hostname1 hostname3
       `)
-      fs.readFile.resultPerCall = [mockHostFile + '\n']
+      fs.readFile.result = mockHostFile + '\n'
       await removeHostnames(['hostname1'], { withIp: '5.6.7.8' })
 
       const expectedContent = dedent(`

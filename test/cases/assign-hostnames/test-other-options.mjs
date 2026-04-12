@@ -2,14 +2,16 @@ import dedent from 'dedent'
 import { expect } from 'chai'
 import { fs, parse, write } from '#test/spies/index'
 import hostsPath from '#src/hosts-path'
-import upsert from '#src/upsert'
+import assignHostnames from '#src/assign-hostnames'
 
 const testOtherOptions = () => {
   context('other options', () => {
     it('calls parse with the right file path', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n', '1.2.3.4 hostname1\n']
-      await upsert('1.2.3.4', ['hostname2'])
-      await upsert('1.2.3.4', ['hostname2'], { filePath: 'path/to/other/file' })
+      fs.readFile.result = '1.2.3.4 hostname1\n'
+      await assignHostnames('1.2.3.4', ['hostname2'])
+      await assignHostnames('1.2.3.4', ['hostname2'], {
+        filePath: 'path/to/other/file',
+      })
       expect(parse.argsPerCall).to.deep.equal([
         [{ filePath: hostsPath }],
         [{ filePath: 'path/to/other/file' }],
@@ -17,13 +19,16 @@ const testOtherOptions = () => {
     })
 
     it('calls write with the correct arguments', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n', '1.2.3.4 hostname1\n']
+      fs.readFile.result = '1.2.3.4 hostname1\n'
       const options = {
-        upsertComment: () => '',
-        preserveFormatting: true,
+        preserveFormatting: false,
       }
-      await upsert('1.2.3.4', ['hostname2'], options)
-      await upsert('1.2.3.4', ['hostname2'], {
+      const defaultFormatOptions = {
+        separatorHostname: ' ',
+        separatorParts: '\t',
+      }
+      await assignHostnames('1.2.3.4', ['hostname2'], options)
+      await assignHostnames('1.2.3.4', ['hostname2'], {
         ...options,
         filePath: 'some/path',
       })
@@ -37,7 +42,7 @@ const testOtherOptions = () => {
             comment: '',
             space: {
               beforeIp: '',
-              beforeHostnames: ' ',
+              afterIp: ' ',
               beforeComment: '',
             },
           },
@@ -48,14 +53,28 @@ const testOtherOptions = () => {
         },
       ]
       expect(write.argsPerCall).to.deep.equal([
-        [parsedLines, { filePath: hostsPath, preserveFormatting: true }],
-        [parsedLines, { filePath: 'some/path', preserveFormatting: true }],
+        [
+          parsedLines,
+          {
+            filePath: hostsPath,
+            preserveFormatting: false,
+            ...defaultFormatOptions,
+          },
+        ],
+        [
+          parsedLines,
+          {
+            filePath: 'some/path',
+            preserveFormatting: false,
+            ...defaultFormatOptions,
+          },
+        ],
       ])
     })
 
     it('inserts to an empty hostfile', async () => {
-      fs.readFile.resultPerCall = ['']
-      await upsert('1.2.3.4', ['hostname1'])
+      fs.readFile.result = ''
+      await assignHostnames('1.2.3.4', ['hostname1'])
 
       const expectedContent = '1.2.3.4\thostname1\n'
 
@@ -65,8 +84,8 @@ const testOtherOptions = () => {
     })
 
     it("inserts when there's no matching ip", async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1']
-      await upsert('5.6.7.8', ['hostname2'])
+      fs.readFile.result = '1.2.3.4 hostname1'
+      await assignHostnames('5.6.7.8', ['hostname2'])
 
       const expectedContent = dedent(`
         1.2.3.4 hostname1

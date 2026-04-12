@@ -4,7 +4,7 @@ export default fn => {
 
     let result
     if (mockFn.resultPerCall.length) result = mockFn.resultPerCall.shift()
-    else if (Object.hasOwn(mockFn, 'return')) result = mockFn.return
+    else if (Object.hasOwn(mockFn, 'result')) result = mockFn.result
     else if (Object.hasOwn(mockFn, 'fnOverride')) {
       result = mockFn.fnOverride(...args)
     } else result = fn.apply(this, args)

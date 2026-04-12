@@ -85,7 +85,7 @@ function parsedLines() {
         comment: z.string().optional(),
         space: partialObject({
           beforeIp: space(),
-          beforeHostnames: ladenSpace(),
+          afterIp: ladenSpace(),
           beforeComment: space(),
         }).optional(),
       }),
@@ -95,4 +95,12 @@ function parsedLines() {
   return z.array(oneParsedLine)
 }
 
-export { ladenSpace, ladenString, partialObject, sharedSchema, space, validate }
+export {
+  ipOrHostname,
+  ladenSpace,
+  ladenString,
+  partialObject,
+  sharedSchema,
+  space,
+  validate,
+}

@@ -34,7 +34,7 @@ describe('internals/to-string-line', () => {
         comment: '#some comment',
         space: {
           beforeIp: spaces[1],
-          beforeHostnames: spaces[2],
+          afterIp: spaces[2],
           beforeComment: spaces[4],
         },
       },
@@ -51,7 +51,7 @@ describe('internals/to-string-line', () => {
         comment: '#some comment',
         space: {
           beforeIp: spaces[1],
-          beforeHostnames: spaces[2],
+          afterIp: spaces[2],
           beforeComment: spaces[4],
         },
       },
@@ -74,7 +74,7 @@ describe('internals/to-string-line', () => {
         comment: 'some comment without a starting #',
         space: {
           beforeIp: spaces[1],
-          beforeHostnames: spaces[2],
+          afterIp: spaces[2],
           beforeComment: spaces[3],
         },
       },
@@ -97,7 +97,7 @@ describe('internals/to-string-line', () => {
             hostnamesWithSpace: ['hostname1', ignoredSpace, 'hostname2'],
             space: {
               beforeIp: ignoredSpace,
-              beforeHostnames: ignoredSpace,
+              afterIp: ignoredSpace,
               beforeComment: ignoredSpace,
             },
           },
@@ -119,7 +119,7 @@ describe('internals/to-string-line', () => {
             comment: '#some comment',
             space: {
               beforeIp: ignoredSpace,
-              beforeHostnames: ignoredSpace,
+              afterIp: ignoredSpace,
               beforeComment: ignoredSpace,
             },
           },
@@ -139,7 +139,7 @@ describe('internals/to-string-line', () => {
             comment: '#some comment ',
             space: {
               beforeIp: ignoredSpace,
-              beforeHostnames: ignoredSpace,
+              afterIp: ignoredSpace,
               beforeComment: ignoredSpace,
             },
           },

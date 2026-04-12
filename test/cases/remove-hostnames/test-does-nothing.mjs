@@ -5,7 +5,7 @@ import removeHostnames from '#src/remove-hostnames'
 const testDoesNothing = () => {
   context('does nothing', () => {
     it('does nothing with an empty file', async () => {
-      fs.readFile.resultPerCall = ['']
+      fs.readFile.result = ''
 
       await removeHostnames(['hostname1'])
 
@@ -13,7 +13,7 @@ const testDoesNothing = () => {
     })
 
     it('does nothing when none of the hostnames exist', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n']
+      fs.readFile.result = '1.2.3.4 hostname1\n'
 
       await removeHostnames(['hostname2', 'hostname3'])
 
@@ -21,7 +21,7 @@ const testDoesNothing = () => {
     })
 
     it('does nothing when ip doesnt exist', async () => {
-      fs.readFile.resultPerCall = ['1.2.3.4 hostname1\n']
+      fs.readFile.result = '1.2.3.4 hostname1\n'
 
       await removeHostnames(['hostname1'], { withIp: '5.6.7.8' })
 

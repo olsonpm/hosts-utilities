@@ -9,6 +9,8 @@
     "test-lite": "mocha --recursive test/cases",
     "test": "pnpm test-lite",
     "test-one": "mocha",
+    "markdown-toc": "sh ./scripts/markdown-toc.sh",
+    "check-markdown-links": "markdown-link-check ./*.md ./docs/**/*.md",
     "coverage": "c8 --all pnpm test-lite",
     "coverage-check": "c8 --check-coverage --100 pnpm test-lite",
     "prettier-check": "prettier --check --ignore-unknown .",
@@ -31,7 +33,7 @@
   },
   "keywords": [
     "hosts",
-    "hostility"
+    "hostile"
   ],
   "author": "Phil Olson <philip.olson@pm.me>",
   "license": "SEE LICENSE IN license.txt",
@@ -47,6 +49,8 @@
     "eslint-plugin-import-x": "^4.16.2",
     "fibble": "^1.2.3",
     "globals": "^17.4.0",
+    "markdown-link-check": "^3.14.2",
+    "markdown-toc-gen": "^1.2.0",
     "mocha": "^11.7.5",
     "monocart-coverage-reports": "^2.12.9",
     "nve": "^18.0.3",

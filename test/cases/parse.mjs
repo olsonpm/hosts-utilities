@@ -24,7 +24,7 @@ describe('parse', () => {
   })
 
   it('reads the correct file', async () => {
-    fs.readFile.resultPerCall = [mockFile.minimal, mockFile.minimal]
+    fs.readFile.result = mockFile.minimal
     await parse()
     await parse({ filePath: 'some/path/to/file' })
     expect(fs.readFile.argsPerCall).to.deep.equal([
@@ -34,7 +34,7 @@ describe('parse', () => {
   })
 
   it('calls parseLine as expected', async () => {
-    fs.readFile.resultPerCall = [mockFile.minimal]
+    fs.readFile.result = mockFile.minimal
     await parse()
 
     // deep matching since we only care about the first argument passed per call
@@ -43,21 +43,21 @@ describe('parse', () => {
   })
 
   it('parses an empty file', async () => {
-    fs.readFile.resultPerCall = [mockFile.empty]
+    fs.readFile.result = mockFile.empty
     const result = await parse()
 
     expect(result).to.deep.equal([])
   })
 
   it('treats a file with only space characters as empty', async () => {
-    fs.readFile.resultPerCall = [mockFile.onlySpace]
+    fs.readFile.result = mockFile.onlySpace
     const result = await parse()
 
     expect(result).to.deep.equal([])
   })
 
   it('parses a minimal file', async () => {
-    fs.readFile.resultPerCall = [mockFile.minimal]
+    fs.readFile.result = mockFile.minimal
     const result = await parse()
 
     const expectedResult = [
@@ -69,7 +69,7 @@ describe('parse', () => {
           comment: '',
           space: {
             beforeIp: '',
-            beforeHostnames: ' ',
+            afterIp: ' ',
             beforeComment: '',
           },
         },
@@ -83,7 +83,7 @@ describe('parse', () => {
   })
 
   it('parses a full file', async () => {
-    fs.readFile.resultPerCall = [mockFile.full]
+    fs.readFile.result = mockFile.full
     const result = await parse()
 
     const expectedResult = [
@@ -95,7 +95,7 @@ describe('parse', () => {
           comment: '',
           space: {
             beforeIp: '',
-            beforeHostnames: ' ',
+            afterIp: ' ',
             beforeComment: '',
           },
         },
@@ -116,7 +116,7 @@ describe('parse', () => {
           comment: '#other comment',
           space: {
             beforeIp: spaces[1],
-            beforeHostnames: spaces[2],
+            afterIp: spaces[2],
             beforeComment: spaces[4],
           },
         },

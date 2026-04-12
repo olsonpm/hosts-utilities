@@ -1,15 +1,14 @@
 import { isEmpty } from './fp-utils.mjs'
-import { isHostname } from './utils.mjs'
+import { getFormatOptions, isHostname } from './utils.mjs'
 
 const toStringLine = (parsedLine, options = {}) => {
-  const {
-    preserveFormatting = true,
-    separatorParts = '\t',
-    separatorHostname = ' ',
-  } = options
-  if (isEmpty(parsedLine.data)) return parsedLine.original
+  const { preserveFormatting, separatorParts, separatorHostname } =
+    getFormatOptions(options)
+  const { data = {}, original = '' } = parsedLine
 
-  const { ip, hostnamesWithSpace, comment, space = {} } = parsedLine.data
+  if (isEmpty(data)) return original
+
+  const { ip, hostnamesWithSpace, comment, space = {} } = data
 
   if (!preserveFormatting) {
     const hostnames = hostnamesWithSpace.filter(isHostname)
@@ -21,7 +20,7 @@ const toStringLine = (parsedLine, options = {}) => {
   const parts = [
     space.beforeIp || '',
     ip,
-    space.beforeHostnames || separatorParts,
+    space.afterIp || separatorParts,
     hostnamesWithSpace.join(''),
   ]
 

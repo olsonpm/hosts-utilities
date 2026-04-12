@@ -44,10 +44,7 @@ const testWrites = () => {
             hostnamesWithSpace: ['hostname1'],
           },
         },
-        {
-          original: '',
-          data: {},
-        },
+        {},
       ]
       await write(parsedLines)
 
@@ -65,14 +62,8 @@ const testWrites = () => {
             hostnamesWithSpace: ['hostname1'],
           },
         },
-        {
-          original: `${spaces[1]}#some comment`,
-          data: {},
-        },
-        {
-          original: '',
-          data: {},
-        },
+        { original: `${spaces[1]}#some comment` },
+        {},
         {
           data: {
             ip: '5.6.7.8',
@@ -80,7 +71,7 @@ const testWrites = () => {
             comment: 'other comment',
             space: {
               beforeIp: spaces[1],
-              beforeHostnames: spaces[2],
+              afterIp: spaces[2],
               beforeComment: spaces[4],
             },
           },

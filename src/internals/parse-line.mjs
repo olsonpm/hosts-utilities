@@ -8,7 +8,7 @@ const parseLine = line => {
     /^/,
     /(\s*)/, // spaceBeforeIp
     /([^#\s]+)/, // ip
-    /(\s+)/, // spaceBeforeHostnames
+    /(\s+)/, // spaceAfterIp
     /([^#\s][^#]*[^#\s])/, // hostnamesStr
     /(\s*)/, // spaceBeforeComment
     /(#.*)?/, // comment
@@ -22,7 +22,7 @@ const parseLine = line => {
     _full,
     spaceBeforeIp,
     ip,
-    spaceBeforeHostnames,
+    spaceAfterIp,
     hostnamesStr,
     spaceBeforeComment,
     comment = '',
@@ -35,7 +35,7 @@ const parseLine = line => {
     comment,
     space: {
       beforeIp: spaceBeforeIp,
-      beforeHostnames: spaceBeforeHostnames,
+      afterIp: spaceAfterIp,
       beforeComment: spaceBeforeComment,
     },
   }

@@ -7,6 +7,8 @@ const any = predicate => arr => arr.some(predicate)
 
 const appendAll = appended => base => base.concat(appended)
 
+const assignDefaults = defaults => obj => Object.assign({}, defaults, obj)
+
 const compose = fnArr => val => fnArr.reduce((res, fn) => fn(res), val)
 
 const containedIn = arr => {
@@ -15,6 +17,10 @@ const containedIn = arr => {
 }
 
 const discardWhen = predicate => arr => arr.filter(negate(predicate))
+
+const ensureStartsWith = prefix => str => {
+  return str.startsWith(prefix) ? str : prefix + str
+}
 
 const findLast = predicate => arr => arr.findLast(predicate)
 
@@ -61,9 +67,11 @@ const split = separator => str => str.split(separator)
 export {
   any,
   appendAll,
+  assignDefaults,
   compose,
   containedIn,
   discardWhen,
+  ensureStartsWith,
   findLast,
   get,
   isEmpty,

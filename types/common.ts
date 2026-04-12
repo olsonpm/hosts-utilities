@@ -5,9 +5,9 @@ type ParsedLine = {
     hostnamesWithSpace?: string[]
     comment?: string
     space?: {
-      beforeIp: string
-      beforeHostnames: string
-      beforeComment: string
+      beforeIp?: string
+      afterIp?: string
+      beforeComment?: string
     }
   }
 }

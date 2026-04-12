@@ -1,18 +1,29 @@
 import { expect } from 'chai'
 import dedent from 'dedent'
-import upsert from '#src/upsert'
+import hostsPath from '#src/hosts-path'
+import assignHostnames from '#src/assign-hostnames'
+import { fs } from '#test/spies/index'
 import testInserts from './test-inserts.mjs'
 import testDoesNothing from './test-does-nothing.mjs'
 import testAppends from './test-appends.mjs'
-import testHandlesComments from './test-handles-comments.mjs'
 import testOtherOptions from './test-other-options.mjs'
 
-describe('upsert', () => {
+describe('assign-hostnames', () => {
   testInserts()
   testDoesNothing()
   testAppends()
-  testHandlesComments()
   testOtherOptions()
+
+  it('keeps existing comments', async () => {
+    fs.readFile.result = '1.2.3.4 hostname1 #some comment\n'
+    await assignHostnames('1.2.3.4', ['hostname2'])
+
+    const expectedContent = '1.2.3.4 hostname1 hostname2 #some comment\n'
+
+    expect(fs.writeFile.argsPerCall).to.deep.equal([
+      [hostsPath, expectedContent],
+    ])
+  })
 
   it('validates the arguments', async () => {
     const expectedMsg = dedent(`
@@ -31,13 +42,10 @@ describe('upsert', () => {
         → at options.separatorHostname
       ✖ Invalid input: expected string, received number
         → at options.separatorParts
-      ✖ Invalid input: expected function, received number
-        → at options.upsertComment
     `)
 
-    const result = upsert(1, 2, {
+    const result = assignHostnames(1, 2, {
       filePath: 3,
-      upsertComment: 4,
       preserveFormatting: 5,
       separatorParts: 6,
       separatorHostname: 7,

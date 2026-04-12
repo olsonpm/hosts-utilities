@@ -15,7 +15,7 @@ const testWhenUsingSpaces = () => {
           comment: '',
           space: {
             beforeIp: '',
-            beforeHostnames: ' ',
+            afterIp: ' ',
             beforeComment: '',
           },
         },
@@ -33,7 +33,7 @@ const testWhenUsingSpaces = () => {
           comment: '#some comment ',
           space: {
             beforeIp: spaces[1],
-            beforeHostnames: spaces[2],
+            afterIp: spaces[2],
             beforeComment: spaces[4],
           },
         },

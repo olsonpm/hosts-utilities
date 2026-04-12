@@ -55,4 +55,34 @@ describe('write', () => {
       )
       .and.eventually.nested.include({ 'cause.code': 'EACCES' })
   })
+
+  it('throws a friendly error upon EACCESS', async () => {
+    const options = {
+      filePath: 'some/protected/file',
+    }
+    const permErr = new Error(
+      "EACCES: permission denied, open 'some/protected/file"
+    )
+    permErr.code = 'EACCES'
+    fs.writeFile.fnOverride = () => Promise.reject(permErr)
+
+    const result = write([], options)
+    await expect(result)
+      .to.be.rejectedWith(
+        "You don't have permissions to write to some/protected/file"
+      )
+      .and.eventually.nested.include({ 'cause.code': 'EACCES' })
+  })
+
+  it('throws the raw error upon other file system errors', async () => {
+    const options = {
+      filePath: 'some/protected/file',
+    }
+    const permErr = new Error('any other filesystem error')
+    permErr.code = 'UNKNOWN'
+    fs.writeFile.fnOverride = () => Promise.reject(permErr)
+
+    const result = write([], options)
+    await expect(result).to.be.rejectedWith('any other filesystem error')
+  })
 })

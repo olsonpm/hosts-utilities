@@ -1,5 +1,5 @@
+export { default as assignHostnames } from './assign-hostnames.js'
 export { ParsedLine, FormatOptions } from './common.ts'
 export { default as hostsPath } from './hosts-path.js'
 export { default as parse } from './parse.js'
-export { default as upsert } from './upsert.js'
 export { default as write } from './write.js'

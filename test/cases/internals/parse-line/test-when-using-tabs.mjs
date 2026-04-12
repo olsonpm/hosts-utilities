@@ -15,7 +15,7 @@ const testWhenUsingTabs = () => {
           comment: '',
           space: {
             beforeIp: '',
-            beforeHostnames: '\t',
+            afterIp: '\t',
             beforeComment: '',
           },
         },
@@ -33,7 +33,7 @@ const testWhenUsingTabs = () => {
           comment: '#some comment ',
           space: {
             beforeIp: tabs[1],
-            beforeHostnames: tabs[2],
+            afterIp: tabs[2],
             beforeComment: tabs[4],
           },
         },

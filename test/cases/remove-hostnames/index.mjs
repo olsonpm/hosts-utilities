@@ -13,7 +13,7 @@ describe('remove-hostnames', () => {
   testOptions()
 
   it('leaves comments as-is', async () => {
-    fs.readFile.resultPerCall = ['1.2.3.4 hostname1 hostname2 #some comment\n']
+    fs.readFile.result = '1.2.3.4 hostname1 hostname2 #some comment\n'
     await removeHostnames(['hostname1'])
 
     const expectedContent = '1.2.3.4 hostname2 #some comment\n'
