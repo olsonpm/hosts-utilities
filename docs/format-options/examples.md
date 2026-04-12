@@ -4,23 +4,23 @@
 
 <!-- toc -->
 
-  - [Preserve Formatting](#preserve-formatting)
-    - [separatorParts](#separatorparts)
-    - [separatorHostname](#separatorhostname)
-  - [Don't Preserve Formatting](#dont-preserve-formatting)
-    - [separatorParts](#separatorparts-1)
-    - [separatorHostname](#separatorhostname-1)
+- [Preserve Formatting](#preserve-formatting)
+  - [separatorParts](#separatorparts)
+  - [separatorHostname](#separatorhostname)
+- [Don't Preserve Formatting](#dont-preserve-formatting)
+  - [separatorParts](#separatorparts-1)
+  - [separatorHostname](#separatorhostname-1)
 
 <!-- tocstop -->
 
-### Preserve Formatting
+## Preserve Formatting
 
 `preserveFormatting` is true by default. The following examples show how
 separatorParts and separatorHostname work while preserving formatting.
 
 <a name="preserve-separatorparts"></a>
 
-#### separatorParts
+### separatorParts
 
 Given an empty hosts file
 
@@ -40,7 +40,7 @@ await assignHostnames('5.6.7.8', ['hostname2'], { separatorParts: ' ' })
 
 <a name="preserve-separatorhostname"></a>
 
-#### separatorHostname
+### separatorHostname
 
 Given a hosts file
 
@@ -62,7 +62,7 @@ await assignHostnames('1.2.3.4', ['hostname4'], { separatorHostname: '\t' })
 // 1.2.3.4 hostname1{tab}hostname2{space}hostname3{tab}hostname4
 ```
 
-### Don't Preserve Formatting
+## Don't Preserve Formatting
 
 Given a hosts file
 
@@ -99,7 +99,7 @@ await assignHostnames('5.6.7.8', ['hostname2'], { preserveWhitespace: false })
 
 <a name="dont-preserve-separatorparts"></a>
 
-#### separatorParts
+### separatorParts
 
 Let's separate the parts via two spaces instead of a tab.
 
@@ -124,7 +124,7 @@ await assignHostnames('5.6.7.8', ['hostname4'], {
 
 <a name="dont-preserve-separatorhostname"></a>
 
-#### separatorHostname
+### separatorHostname
 
 Let's separate the hostnames by two spaces instead of one
 
