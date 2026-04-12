@@ -10,10 +10,10 @@
 - [Install](#install)
 - [Use](#use)
 - [API](#api)
+  - [assignHostnames](#assignhostnames)
   - [hostsPath](#hostspath)
   - [parse](#parse)
   - [removeHostnames](#removehostnames)
-  - [assignHostnames](#assignhostnames)
   - [write](#write)
 - [Schemas](#schemas)
   - [Parse Options](#parse-options)
@@ -84,6 +84,39 @@ await hosts.assignHostnames('1.2.3.4', ['hostname2'])
 > import hostsPath from 'hosts-utilities/hosts-path'
 > ```
 
+### assignHostnames
+
+**What is it?**
+
+- A function to add or update host entries
+
+**Why use it?**
+
+- To add hostnames to an existing entry, or add a new entry
+
+**Signature**
+
+- async (ip: string, hostnames: string[], options: [AssignOptions](#assign-hostnames-options) = {}) => `undefined`
+  - ip and hostnames must match `/^[^#\s]+$/`
+
+**Examples**
+
+Assume a file /etc/hosts with
+
+```txt
+1.2.3.4 hostname1 hostname2
+```
+
+```js
+await assignHostnames('1.2.3.4', ['hostname1', 'hostname3'])
+// updates /etc/hosts to
+// 1.2.3.4 hostname1 hostname2 hostname3
+
+await assignHostnames('5.6.7.8', ['hostname4'])
+// adds the line
+// 5.6.7.8 hostname4
+```
+
 ### hostsPath
 
 A string
@@ -143,39 +176,6 @@ Let's assume a file /etc/hosts with
 await removeHostnames(['hostname1', 'hostname2'])
 // updates /etc/hosts to
 // 5.6.7.8 hostname3
-```
-
-### assignHostnames
-
-**What is it?**
-
-- A function to add or update host entries
-
-**Why use it?**
-
-- To add hostnames to an existing entry, or add a new entry
-
-**Signature**
-
-- async (ip: string, hostnames: string[], options: [AssignOptions](#assign-hostnames-options) = {}) => `undefined`
-  - ip and hostnames must match `/^[^#\s]+$/`
-
-**Examples**
-
-Assume a file /etc/hosts with
-
-```txt
-1.2.3.4 hostname1 hostname2
-```
-
-```js
-await assignHostnames('1.2.3.4', ['hostname1', 'hostname3'])
-// updates /etc/hosts to
-// 1.2.3.4 hostname1 hostname2 hostname3
-
-await assignHostnames('5.6.7.8', ['hostname4'])
-// adds the line
-// 5.6.7.8 hostname4
 ```
 
 ### write
