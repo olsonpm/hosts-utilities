@@ -19,6 +19,7 @@
   - [Parse Options](#parse-options)
   - [Remove Hostnames Options](#remove-hostnames-options)
   - [Assign Hostnames Options](#assign-hostnames-options)
+  - [Write Options](#write-options)
   - [Format Options](#format-options)
   - [Parsed Line](#parsed-line)
 
@@ -190,7 +191,7 @@ await assignHostnames('5.6.7.8', ['hostname4'])
 
 **Signature**
 
-- async (parsedLines: [ParsedLine](#parsed-line)[]) => `undefined`
+- async (parsedLines: [ParsedLine](#parsed-line)[], options: [WriteOptions](#write-options) = {}) => `undefined`
 
 **Examples**
 
@@ -237,6 +238,18 @@ FormatOptions & {
 ```
 
 ### Assign Hostnames Options
+
+Includes [FormatOptions](#format-options)
+
+```ts
+FormatOptions & {
+  // default: hostsPath
+  // validation: minimum of one character
+  filePath?: string
+}
+```
+
+### Write Options
 
 Includes [FormatOptions](#format-options)
 
