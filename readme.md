@@ -1,4 +1,4 @@
-# Hosts Utilities
+# Hosts Utilities - Beta
 
 ## Table of Contents
 
@@ -6,6 +6,7 @@
 
 - [What is it?](#what-is-it)
 - [Why did I make this library?](#why-did-i-make-this-library)
+- [Why is it in beta?](#why-is-it-in-beta)
 - [Install](#install)
 - [Use](#use)
 - [API](#api)
@@ -36,6 +37,14 @@ A few node utilities for working with your hosts file, inspired by [Hostile][hos
 I wanted to programatically work with my hosts file while maintaining
 formatting. Hostile doesn't seem to be maintained anymore and lacks features
 I was looking for.
+
+## Why is it in beta?
+
+Because I haven't worked much with hosts files and can't be confident in the
+code until it's used in the real world.
+
+The hosts file seems simple, but in my experience, real-world implementations of
+anything are quirky.
 
 ## Install
 
