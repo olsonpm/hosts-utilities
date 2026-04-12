@@ -40,6 +40,7 @@
   "packageManager": "pnpm@10.31.0",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@olsonpm/markdown-toc-gen": "1.2.0-personal2",
     "c8": "^11.0.0",
     "chai": "^6.2.2",
     "chai-as-promised": "^8.0.2",
@@ -50,7 +51,6 @@
     "fibble": "^1.2.3",
     "globals": "^17.4.0",
     "markdown-link-check": "^3.14.2",
-    "markdown-toc-gen": "^1.2.0",
     "mocha": "^11.7.5",
     "monocart-coverage-reports": "^2.12.9",
     "nve": "^18.0.3",

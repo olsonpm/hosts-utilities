@@ -1,19 +1,20 @@
-## Format Options Details
+# Format Options Details
 
 These options can be passed to any utility which writes to a hosts file.
 
+## Table of Contents
+
 <!-- toc -->
 
-- [Format Options Details](#format-options-details)
-  - [Notes](#notes)
-  - [At a glance](#at-a-glance)
-  - [preserveFormatting](#preserveformatting)
-  - [separatorParts](#separatorparts)
-  - [separatorHostname](#separatorhostname)
+- [Notes](#notes)
+- [At a glance](#at-a-glance)
+- [preserveFormatting](#preserveformatting)
+- [separatorParts](#separatorparts)
+- [separatorHostname](#separatorhostname)
 
 <!-- tocstop -->
 
-### Notes
+## Notes
 
 > [!note]
 > Preserving whitespace complicates the API. It's on by default because the
@@ -28,7 +29,7 @@ These options can be passed to any utility which writes to a hosts file.
 > modify. If this trips you up then [raise an issue][raise-an-issue] so we can
 > figure out your use case.
 
-### At a glance
+## At a glance
 
 ```ts
 {
@@ -38,7 +39,7 @@ These options can be passed to any utility which writes to a hosts file.
 }
 ```
 
-### preserveFormatting
+## preserveFormatting
 
 - Default: `true`
 - Preserve the whitespace in the hosts file
@@ -46,7 +47,7 @@ These options can be passed to any utility which writes to a hosts file.
 - If you pass `false` then each parsed line in the file will be formatted using `separatorParts` and `separatorHostname`
   - See [this example](./examples.md#dont-preserve-formatting) for reference.
 
-### separatorParts
+## separatorParts
 
 - Default: `\t`
 - What are "parts"?<br/>
@@ -65,7 +66,7 @@ These options can be passed to any utility which writes to a hosts file.
   - See [this example](./examples.md#preserve-separatorparts) for reference
 - Must match `/^[ \t]+$/`
 
-### separatorHostname
+## separatorHostname
 
 - Default: `' '`
 - When `preserveFormatting` is false, this space separates **all** hostnames.

@@ -1,10 +1,15 @@
-## Format Options Examples
+# Format Options Examples
+
+## Table of Contents
 
 <!-- toc -->
 
-- [Format Options Examples](#format-options-examples)
   - [Preserve Formatting](#preserve-formatting)
     - [separatorParts](#separatorparts)
+    - [separatorHostname](#separatorhostname)
+  - [Don't Preserve Formatting](#dont-preserve-formatting)
+    - [separatorParts](#separatorparts-1)
+    - [separatorHostname](#separatorhostname-1)
 
 <!-- tocstop -->
 

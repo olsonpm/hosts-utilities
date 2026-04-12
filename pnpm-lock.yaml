@@ -15,6 +15,9 @@ importers:
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.2.0)
+      '@olsonpm/markdown-toc-gen':
+        specifier: 1.2.0-personal2
+        version: 1.2.0-personal2
       c8:
         specifier: ^11.0.0
         version: 11.0.0(monocart-coverage-reports@2.12.9)
@@ -45,9 +48,6 @@ importers:
       markdown-link-check:
         specifier: ^3.14.2
         version: 3.14.2
-      markdown-toc-gen:
-        specifier: ^1.2.0
-        version: 1.2.0
       mocha:
         specifier: ^11.7.5
         version: 11.7.5
@@ -166,6 +166,10 @@ packages:
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
+
+  '@olsonpm/markdown-toc-gen@1.2.0-personal2':
+    resolution: {integrity: sha512-P2ULn8BfDwPTGfr/NLrZVtVQ+dgXEEp+7z6b0qWfSqA3E8KboZJ560UWzB4T7j0BpTX9/sK78y+1MGGNJHp8uQ==}
+    hasBin: true
 
   '@oozcitak/dom@2.0.2':
     resolution: {integrity: sha512-GjpKhkSYC3Mj4+lfwEyI1dqnsKTgwGy48ytZEhm4A/xnH/8z9M3ZVXKr/YGQi3uCLs1AEBS+x5T2JPiueEDW8w==}
@@ -1205,10 +1209,6 @@ packages:
   markdown-link-extractor@4.0.3:
     resolution: {integrity: sha512-aEltJiQ4/oC0h6Jbw/uuATGSHZPkcH8DIunNH1A0e+GSFkvZ6BbBkdvBTVfIV8r6HapCU3yTd0eFdi3ZeM1eAQ==}
 
-  markdown-toc-gen@1.2.0:
-    resolution: {integrity: sha512-+8eDFxBDC08XpBa8NdHaU0kDUGrc2XLn/3xCdzZZ0MWQ3ZvUhkdCAINeUwcGjhJ3zkBbfiVVWscORvI1UzO9sQ==}
-    hasBin: true
-
   marked@17.0.6:
     resolution: {integrity: sha512-gB0gkNafnonOw0obSTEGZTT86IuhILt2Wfx0mWH/1Au83kybTayroZ/V6nS25mN7u8ASy+5fMhgB3XPNrOZdmA==}
     engines: {node: '>= 20'}
@@ -1902,6 +1902,11 @@ snapshots:
       '@emnapi/runtime': 1.9.2
       '@tybys/wasm-util': 0.10.1
     optional: true
+
+  '@olsonpm/markdown-toc-gen@1.2.0-personal2':
+    dependencies:
+      jest-diff: 29.7.0
+      yargs: 17.7.2
 
   '@oozcitak/dom@2.0.2':
     dependencies:
@@ -2899,11 +2904,6 @@ snapshots:
     dependencies:
       html-link-extractor: 1.0.5
       marked: 17.0.6
-
-  markdown-toc-gen@1.2.0:
-    dependencies:
-      jest-diff: 29.7.0
-      yargs: 17.7.2
 
   marked@17.0.6: {}
 

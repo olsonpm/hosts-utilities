@@ -1,17 +1,29 @@
-## Hosts Utilities
+# Hosts Utilities
+
+## Table of Contents
 
 <!-- toc -->
 
-- [Hosts Utilities](#hosts-utilities)
-  - [What is it?](#what-is-it)
-  - [Why did I make this library?](#why-did-i-make-this-library)
-  - [Install](#install)
-  - [Use](#use)
-  - [API](#api)
+- [What is it?](#what-is-it)
+- [Why did I make this library?](#why-did-i-make-this-library)
+- [Install](#install)
+- [Use](#use)
+- [API](#api)
+  - [hostsPath](#hostspath)
+  - [parse](#parse)
+  - [removeHostnames](#removehostnames)
+  - [assignHostnames](#assignhostnames)
+  - [write](#write)
+- [Schemas](#schemas)
+  - [Parse Options](#parse-options)
+  - [Remove Hostnames Options](#remove-hostnames-options)
+  - [Assign Hostnames Options](#assign-hostnames-options)
+  - [Format Options](#format-options)
+  - [Parsed Line](#parsed-line)
 
 <!-- tocstop -->
 
-### What is it?
+## What is it?
 
 A few node utilities for working with your hosts file, inspired by [Hostile][hostile]
 
@@ -19,19 +31,19 @@ A few node utilities for working with your hosts file, inspired by [Hostile][hos
 > If you're looking for a CLI frontend, [raise an issue][raise-an-issue]
 > and I'll write one.
 
-### Why did I make this library?
+## Why did I make this library?
 
 I wanted to programatically work with my hosts file while maintaining
 formatting. Hostile doesn't seem to be maintained anymore and lacks features
 I was looking for.
 
-### Install
+## Install
 
 ```sh
 npm install hosts-utilities
 ```
 
-### Use
+## Use
 
 Assume a hosts file `/etc/hosts`
 
@@ -50,7 +62,7 @@ await hosts.assignHostnames('1.2.3.4', ['hostname2'])
 // 1.2.3.4 hostname1 hostname2
 ```
 
-### API
+## API
 
 > [!note]
 > Both named and sub-path exports are available. Paths are kebab-cased.<br />
@@ -62,14 +74,14 @@ await hosts.assignHostnames('1.2.3.4', ['hostname2'])
 > import hostsPath from 'hosts-utilities/hosts-path'
 > ```
 
-#### hostsPath
+### hostsPath
 
 A string
 
 - On windows: `C:\Windows\System32\drivers\etc\hosts`
 - On not windows: `/etc/hosts`
 
-#### parse
+### parse
 
 **What is it\?**
 
@@ -93,7 +105,7 @@ const parsedLines1 = await parse()
 const parsedLines2 = await parse({ filePath: '/path/to/custom/hosts' })
 ```
 
-#### removeHostnames
+### removeHostnames
 
 **What is it\?**
 
@@ -123,7 +135,7 @@ await removeHostnames(['hostname1', 'hostname2'])
 // 5.6.7.8 hostname3
 ```
 
-#### assignHostnames
+### assignHostnames
 
 **What is it?**
 
@@ -156,7 +168,7 @@ await assignHostnames('5.6.7.8', ['hostname4'])
 // 5.6.7.8{tab}hostname4
 ```
 
-#### write
+### write
 
 **What is it\?**
 
@@ -182,9 +194,9 @@ const updatedLines = doSomethingTo(parsedLines)
 await write(updatedLines)
 ```
 
-### Schemas
+## Schemas
 
-#### Parse Options
+### Parse Options
 
 ```ts
 {
@@ -194,7 +206,7 @@ await write(updatedLines)
 }
 ```
 
-#### Remove Hostnames Options
+### Remove Hostnames Options
 
 > [!WARN]
 > The option `withIp` is provided because [Hostile supports it][hostile-supports-remove-by-ip],
@@ -215,7 +227,7 @@ FormatOptions & {
 }
 ```
 
-#### Assign Hostnames Options
+### Assign Hostnames Options
 
 Includes [FormatOptions](#format-options)
 
@@ -227,7 +239,7 @@ FormatOptions & {
 }
 ```
 
-#### Format Options
+### Format Options
 
 > [!note]
 > Due to complexity, these options may not behave as you expect.
@@ -245,7 +257,7 @@ At a glance
 }
 ```
 
-#### Parsed Line
+### Parsed Line
 
 > [!note]
 > Due to complexity, this structure may not work how you expect.

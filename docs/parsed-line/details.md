@@ -1,11 +1,12 @@
-## Parsed Line Details
+# Parsed Line Details
+
+## Table of Contents
 
 <!-- toc -->
 
-- [Parsed Line Details](#parsed-line-details)
-  - [At a glance](#at-a-glance)
-  - [original](#original)
-  - [data](#data)
+- [At a glance](#at-a-glance)
+- [original](#original)
+- [data](#data)
   - [data.ip](#dataip)
   - [data.hostnamesWithSpace](#datahostnameswithspace)
   - [data.comment](#datacomment)
@@ -15,7 +16,7 @@
 
 <!-- tocstop -->
 
-### At a glance
+## At a glance
 
 ```ts
 {
@@ -33,7 +34,7 @@
 }
 ```
 
-### original
+## original
 
 - parse() output
   - this property will always exist and hold the line
@@ -41,7 +42,7 @@
   - only required if you want to write a line that doesn't use [data](#data).
     Typically this will be for lines containing only comments
 
-### data
+## data
 
 - parse() output
   - if no host entry was parsed, it will be an empty object, otherwise it will

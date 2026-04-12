@@ -1,21 +1,22 @@
-## Parsed Line Examples
+# Parsed Line Examples
+
+## Table of Contents
 
 <!-- toc -->
 
-- [Parsed Line Examples](#parsed-line-examples)
-  - [Notes](#notes)
-  - [Parse](#parse)
-  - [Write](#write)
-    - [An empty file](#an-empty-file)
-    - [A minimal entry](#a-minimal-entry)
-    - [With specific spacing](#with-specific-spacing)
-    - [The comment can optionally include a hash](#the-comment-can-optionally-include-a-hash)
-    - [With an empty line](#with-an-empty-line)
-    - [With lines that don't have host entries](#with-lines-that-dont-have-host-entries)
+- [Notes](#notes)
+- [Parse](#parse)
+- [Write](#write)
+  - [An empty file](#an-empty-file)
+  - [A minimal entry](#a-minimal-entry)
+  - [With specific spacing](#with-specific-spacing)
+  - [The comment can optionally include a hash](#the-comment-can-optionally-include-a-hash)
+  - [With an empty line](#with-an-empty-line)
+  - [With lines that don't have host entries](#with-lines-that-dont-have-host-entries)
 
 <!-- tocstop -->
 
-### Notes
+## Notes
 
 > [!important]
 > It's important to understand that while `parse()` returns a mostly full
@@ -23,7 +24,7 @@
 >
 > These examples give you an idea for how it works.
 
-### Parse
+## Parse
 
 For a hosts file
 
@@ -91,15 +92,15 @@ console.log(parsedLines)
 
 <!-- prettier-ignore-end -->
 
-### Write
+## Write
 
-#### An empty file
+### An empty file
 
 ```js
 await write([])
 ```
 
-#### A minimal entry
+### A minimal entry
 
 ```js
 await write([
@@ -116,7 +117,7 @@ await write([
 1.2.3.4{tab}hostname1
 ```
 
-#### With specific spacing
+### With specific spacing
 
 ```js
 await write([
@@ -135,7 +136,7 @@ await write([
 ])
 ```
 
-#### The comment can optionally include a hash
+### The comment can optionally include a hash
 
 ```js
 await write([
@@ -155,7 +156,7 @@ await write([
 1.2.3.4{tab}hostname1{tab}#some comment
 ```
 
-#### With an empty line
+### With an empty line
 
 ```js
 await write([
@@ -181,7 +182,7 @@ await write([
 5.6.7.8{tab}hostname2
 ```
 
-#### With lines that don't have host entries
+### With lines that don't have host entries
 
 ```js
 await write([
