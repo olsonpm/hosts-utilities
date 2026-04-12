@@ -1,10 +1,10 @@
-import type { ParsedLine, FormatOptions } from './common.ts'
+import type { ParsedLineInput, FormatOptions } from './common.ts'
 
 type Options = FormatOptions & {
   filePath?: string
 }
 
 export default function (
-  parsedLines: ParsedLine[],
+  parsedLines: ParsedLineInput[],
   options: Options
 ): Promise<void>
