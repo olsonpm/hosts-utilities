@@ -1,6 +1,6 @@
 {
   "name": "hosts-utilities",
-  "version": "0.1.0-beta5",
+  "version": "0.1.0",
   "description": "Utilities for the hosts file",
   "type": "module",
   "main": "src/index.mjs",
