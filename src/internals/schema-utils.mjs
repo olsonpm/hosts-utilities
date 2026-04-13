@@ -1,4 +1,5 @@
 import * as z from 'zod'
+import { eol } from './utils.mjs'
 
 const ladenString = () => z.string().min(1)
 
@@ -18,7 +19,7 @@ const validate = (argsObj, getSchema) => {
   const { error, success } = getSchema().safeParse(argsObj)
   if (!success) {
     const prettyMsg = customPrettify(error)
-    throw new Error(`Arguments failed the schema\n${prettyMsg}`, {
+    throw new Error(`Arguments failed the schema${eol}${prettyMsg}`, {
       cause: error,
     })
   }
@@ -47,7 +48,7 @@ function customPrettify(error) {
     lines.push(`  → at ${toDotPath(issue.path)}`)
   }
 
-  return lines.join('\n')
+  return lines.join(eol)
 }
 
 /* c8 ignore start */
