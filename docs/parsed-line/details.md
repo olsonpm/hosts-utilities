@@ -4,6 +4,7 @@
 
 <!-- toc -->
 
+- [Notes](#notes)
 - [At a glance](#at-a-glance)
 - [original](#original)
 - [data](#data)
@@ -15,6 +16,15 @@
   - [data.space.beforeComment](#dataspacebeforecomment)
 
 <!-- tocstop -->
+
+## Notes
+
+> [!note]
+> This structure has different semantics depending on whether you're parsing or
+> writing, and the value of [preserveFormatting][preserve-formatting]. I explain
+> how each property works in all scenarios, but let me know if anything is
+> confusing. If the current API trips people up, then I should refactor it to
+> something easier to reason about.
 
 ## At a glance
 
@@ -67,6 +77,8 @@
 - write() input
   - a required property with at least one element
   - elements must match either `/^[^#\s]+$/` or `/^[ \t]+$/`
+  - spaces in this array are only used when [preserveFormatting][preserve-formatting] is true.
+    When false, [separatorHostname][separator-hostname] will separate each hostname.
 
 ### data.comment
 
@@ -84,6 +96,8 @@
 - write() input
   - optional. By default, no space will prepend the IP
   - must match `/^[ \t]*$/`
+  - this will only be used when [preserveFormatting][preserve-formatting] is true.
+    When false, no space will prepend the IP.
 
 ### data.space.afterIp
 
@@ -93,6 +107,8 @@
   - optional. By default, [formatOptions.separatorParts](../format-options/details.md#separatorparts)
     will append the IP
   - must match `/^[ \t]+$/`
+  - this will only be used when [preserveFormatting][preserve-formatting] is true.
+    When false, [separatorParts][separator-parts] will be used.
 
 ### data.space.beforeComment
 
@@ -103,3 +119,9 @@
   - optional. By default, [formatOptions.separatorParts](../format-options/details.md#separatorparts)
     will prepend the comment
   - must match `/^[ \t]*$/`
+  - this will only be used when [preserveFormatting][preserve-formatting] is true.
+    When false, [separatorParts][separator-parts] will be used.
+
+[preserve-formatting]: ../format-options/details.md#preserveformatting
+[separator-hostname]: ../format-options/details.md#separatorhostname
+[separator-parts]: ../format-options/details.md#separatorparts

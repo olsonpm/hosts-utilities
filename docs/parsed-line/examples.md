@@ -10,6 +10,7 @@
   - [An empty file](#an-empty-file)
   - [A minimal entry](#a-minimal-entry)
   - [With specific spacing](#with-specific-spacing)
+  - [Ignore specific spacing](#ignore-specific-spacing)
   - [The comment can optionally include a hash](#the-comment-can-optionally-include-a-hash)
   - [With an empty line](#with-an-empty-line)
   - [With lines that don't have host entries](#with-lines-that-dont-have-host-entries)
@@ -136,6 +137,43 @@ await write([
 ])
 ```
 
+\*_hyphens represent spaces_
+
+```txt
+-1.2.3.4--hostname1---hostname2----#some comment
+```
+
+### Ignore specific spacing
+
+The spacing in each parsed line is only respected when [preserveFormatting][preserve-formatting]
+is true. When it's false, the [FormatOptions](../format-options/details.md)
+separators are used and `space.beforeIp` is ignored.
+
+```js
+const options = { preserveFormatting: false }
+
+const parsedLines = [
+  {
+    data: {
+      ip: '1.2.3.4',
+      hostnamesWithSpace: ['hostname1', spaces[3], 'hostname2'],
+      comment: 'some comment',
+      space: {
+        beforeIp: spaces[1],
+        afterIp: spaces[2],
+        beforeComment: spaces[4],
+      },
+    },
+  },
+]
+
+await write(parsedLines, options)
+```
+
+```txt
+1.2.3.4{tab}hostname1 hostname2{tab}#some comment
+```
+
 ### The comment can optionally include a hash
 
 ```js
@@ -200,3 +238,5 @@ await write([
 # some comment
 1.2.3.4{tab}hostname1
 ```
+
+[preserve-formatting]: ../format-options/details.md#preserveformatting
