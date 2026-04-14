@@ -13,10 +13,14 @@
 
 <!-- tocstop -->
 
+<br />
+
 ## Preserve Formatting
 
 `preserveFormatting` is true by default. The following examples show how
 separatorParts and separatorHostname work while preserving formatting.
+
+<br />
 
 <a name="preserve-separatorparts"></a>
 
@@ -37,6 +41,8 @@ await assignHostnames('5.6.7.8', ['hostname2'], { separatorParts: ' ' })
 // adds the line
 // 5.6.7.8{space}hostname2
 ```
+
+<br />
 
 <a name="preserve-separatorhostname"></a>
 
@@ -62,7 +68,12 @@ await assignHostnames('1.2.3.4', ['hostname4'], { separatorHostname: '\t' })
 // 1.2.3.4 hostname1{tab}hostname2{space}hostname3{tab}hostname4
 ```
 
+<br />
+
 ## Don't Preserve Formatting
+
+The following examples show how separatorParts and separatorHostname work when
+preserveFormatting is false.
 
 Given a hosts file
 
@@ -74,7 +85,7 @@ Given a hosts file
 Assigning any hostname will normalize all whitespace
 
 ```js
-await assignHostnames('5.6.7.8', ['hostname3'], { preserveWhitespace: false })
+await assignHostnames('5.6.7.8', ['hostname3'], { preserveFormatting: false })
 // updates it to
 // 1.2.3.4{tab}hostname1{tab}#some comment
 // 5.6.7.8{tab}hostname2{space}hostname3
@@ -93,9 +104,11 @@ Let's reset the host file to show what I mean:
 and assign an existing hostname
 
 ```js
-await assignHostnames('5.6.7.8', ['hostname2'], { preserveWhitespace: false })
+await assignHostnames('5.6.7.8', ['hostname2'], { preserveFormatting: false })
 // doesn't modify the hosts file
 ```
+
+<br />
 
 <a name="dont-preserve-separatorparts"></a>
 
@@ -112,13 +125,15 @@ Given a hosts file
 
 ```js
 await assignHostnames('5.6.7.8', ['hostname4'], {
-  preserveWhitespace: false,
+  preserveFormatting: false,
   separatorParts: spaces[2],
 })
 // updates it to: (hyphen represents a space)
 // 1.2.3.4--hostname1--#some comment
 // 5.6.7.8--hostname2-hostname3-hostname4
 ```
+
+<br />
 
 <a name="dont-preserve-separatorhostname"></a>
 

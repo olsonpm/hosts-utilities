@@ -17,6 +17,8 @@
 
 <!-- tocstop -->
 
+<br />
+
 ## Notes
 
 > [!important]
@@ -24,6 +26,8 @@
 > structure, `write()` only requires a minimal set of properties.
 >
 > These examples give you an idea for how it works.
+
+<br />
 
 ## Parse
 
@@ -93,6 +97,8 @@ console.log(parsedLines)
 
 <!-- prettier-ignore-end -->
 
+<br />
+
 ## Write
 
 ### An empty file
@@ -100,6 +106,8 @@ console.log(parsedLines)
 ```js
 await write([])
 ```
+
+<br />
 
 ### A minimal entry
 
@@ -117,6 +125,8 @@ await write([
 ```txt
 1.2.3.4{tab}hostname1
 ```
+
+<br />
 
 ### With specific spacing
 
@@ -142,6 +152,8 @@ await write([
 ```txt
 -1.2.3.4--hostname1---hostname2----#some comment
 ```
+
+<br />
 
 ### Ignore specific spacing
 
@@ -174,6 +186,8 @@ await write(parsedLines, options)
 1.2.3.4{tab}hostname1 hostname2{tab}#some comment
 ```
 
+<br />
+
 ### The comment can optionally include a hash
 
 ```js
@@ -193,6 +207,8 @@ await write([
 ```txt
 1.2.3.4{tab}hostname1{tab}#some comment
 ```
+
+<br />
 
 ### With an empty line
 
@@ -219,6 +235,8 @@ await write([
 
 5.6.7.8{tab}hostname2
 ```
+
+<br />
 
 ### With lines that don't have host entries
 

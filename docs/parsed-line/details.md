@@ -17,6 +17,8 @@
 
 <!-- tocstop -->
 
+<br />
+
 ## Notes
 
 > [!note]
@@ -25,6 +27,8 @@
 > how each property works in all scenarios, but let me know if anything is
 > confusing. If the current API trips people up, then I should refactor it to
 > something easier to reason about.
+
+<br />
 
 ## At a glance
 
@@ -44,6 +48,8 @@
 }
 ```
 
+<br />
+
 ## original
 
 - parse() output
@@ -51,6 +57,8 @@
 - write() input
   - only required if you want to write a line that doesn't use [data](#data).
     Typically this will be for lines containing only comments
+
+<br />
 
 ## data
 
@@ -63,12 +71,16 @@
     are required.
   - When omitted, [original](#original) will be written instead.
 
+<br />
+
 ### data.ip
 
 - parse() output
   - will always have an ip address
 - write() input
   - a required property matching the regex `/^[^#\s]+$/`
+
+<br />
 
 ### data.hostnamesWithSpace
 
@@ -80,6 +92,8 @@
   - spaces in this array are only used when [preserveFormatting][preserve-formatting] is true.
     When false, [separatorHostname][separator-hostname] will separate each hostname.
 
+<br />
+
 ### data.comment
 
 - parse() output
@@ -88,6 +102,8 @@
 - write() input
   - an optional string
   - the hash prefix is optional
+
+<br />
 
 ### data.space.beforeIp
 
@@ -99,6 +115,8 @@
   - this will only be used when [preserveFormatting][preserve-formatting] is true.
     When false, no space will prepend the IP.
 
+<br />
+
 ### data.space.afterIp
 
 - parse() output
@@ -109,6 +127,8 @@
   - must match `/^[ \t]+$/`
   - this will only be used when [preserveFormatting][preserve-formatting] is true.
     When false, [separatorParts][separator-parts] will be used.
+
+<br />
 
 ### data.space.beforeComment
 

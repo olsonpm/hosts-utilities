@@ -25,6 +25,8 @@
 
 <!-- tocstop -->
 
+<br />
+
 ## What is it?
 
 A few node utilities for working with your hosts file, inspired by [Hostile][hostile]
@@ -33,11 +35,15 @@ A few node utilities for working with your hosts file, inspired by [Hostile][hos
 > If you're looking for a CLI frontend, [raise an issue][raise-an-issue]
 > and I'll write one.
 
+<br/>
+
 ## Why did I make this library?
 
 I wanted to programatically work with my hosts file while maintaining
 formatting. Hostile doesn't seem to be maintained anymore and lacks features
 I was looking for.
+
+<br/>
 
 ## Why is it in beta?
 
@@ -47,11 +53,15 @@ code until it's used in the real world.
 The hosts file seems simple, but in my experience, real-world implementations of
 anything are quirky.
 
+<br/>
+
 ## Install
 
 ```sh
 npm install hosts-utilities
 ```
+
+<br/>
 
 ## Use
 
@@ -72,6 +82,8 @@ await hosts.assignHostnames('1.2.3.4', ['hostname2'])
 // 1.2.3.4 hostname1 hostname2
 ```
 
+<br/>
+
 ## API
 
 > [!note]
@@ -79,20 +91,16 @@ await hosts.assignHostnames('1.2.3.4', ['hostname2'])
 > Example:
 >
 > ```js
-> import { hostsPath } from 'hosts-utilities'
+> import { assignHostnames } from 'hosts-utilities'
 > // or
-> import hostsPath from 'hosts-utilities/hosts-path'
+> import assignHostnames from 'hosts-utilities/assign-hostnames'
 > ```
+
+<br/>
 
 ### assignHostnames
 
-**What is it?**
-
-- A function to add or update host entries
-
-**Why use it?**
-
-- To add hostnames to an existing entry, or add a new entry
+Add or update host entries
 
 **Signature**
 
@@ -117,6 +125,8 @@ await assignHostnames('5.6.7.8', ['hostname4'])
 // 5.6.7.8 hostname4
 ```
 
+<br/>
+
 ### hostsPath
 
 A string
@@ -124,11 +134,11 @@ A string
 - On windows: `C:\Windows\System32\drivers\etc\hosts`
 - On not windows: `/etc/hosts`
 
+<br/>
+
 ### parse
 
-**What is it\?**
-
-- A function which parses the hosts file
+Parse the hosts file
 
 **Why use it\?**
 
@@ -148,15 +158,9 @@ const parsedLines1 = await parse()
 const parsedLines2 = await parse({ filePath: '/path/to/custom/hosts' })
 ```
 
+<br/>
+
 ### removeHostnames
-
-**What is it\?**
-
-- A function removing the hostnames from a hosts file
-
-**Why use it\?**
-
-- Self explanatory
 
 **Signature**
 
@@ -178,11 +182,11 @@ await removeHostnames(['hostname1', 'hostname2'])
 // 5.6.7.8 hostname3
 ```
 
+<br/>
+
 ### write
 
-**What is it\?**
-
-- A function to write `parsedLines` to the host file
+Write parsed lines to the hosts file
 
 **Why use it\?**
 
@@ -204,6 +208,8 @@ const updatedLines = doSomethingTo(parsedLines)
 await write(updatedLines)
 ```
 
+<br/>
+
 ## Schemas
 
 ### Parse Options
@@ -215,6 +221,8 @@ await write(updatedLines)
   filePath?: string
 }
 ```
+
+<br />
 
 ### Remove Hostnames Options
 
@@ -237,6 +245,8 @@ FormatOptions & {
 > meaning I assume someone found it helpful. Keep in mind hosts shouldn't be
 > mapped to more than one IP address, so `withIp` should be unnecessary.
 
+<br />
+
 ### Assign Hostnames Options
 
 Includes [FormatOptions](#format-options)
@@ -249,6 +259,8 @@ FormatOptions & {
 }
 ```
 
+<br />
+
 ### Write Options
 
 Includes [FormatOptions](#format-options)
@@ -260,6 +272,8 @@ FormatOptions & {
   filePath?: string
 }
 ```
+
+<br />
 
 ### Format Options
 
@@ -278,6 +292,8 @@ At a glance
   separatorHostname?: string = ' '
 }
 ```
+
+<br />
 
 ### Parsed Line
 

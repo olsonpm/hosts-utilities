@@ -14,6 +14,8 @@ These options can be passed to any utility which writes to a hosts file.
 
 <!-- tocstop -->
 
+<br />
+
 ## Notes
 
 > [!note]
@@ -29,6 +31,8 @@ These options can be passed to any utility which writes to a hosts file.
 > modify. If this trips you up then [raise an issue][raise-an-issue] so we can
 > figure out your use case.
 
+<br />
+
 ## At a glance
 
 ```ts
@@ -39,6 +43,8 @@ These options can be passed to any utility which writes to a hosts file.
 }
 ```
 
+<br />
+
 ## preserveFormatting
 
 - Default: `true`
@@ -46,6 +52,8 @@ These options can be passed to any utility which writes to a hosts file.
   - Note this library doesn't detect spacing when adding entries. See [this example](./examples.md#preserve-separatorhostname) for reference
 - If you pass `false` then each parsed line in the file will be formatted using `separatorParts` and `separatorHostname`
   - See [this example](./examples.md#dont-preserve-formatting) for reference.
+
+<br />
 
 ## separatorParts
 
@@ -65,6 +73,8 @@ These options can be passed to any utility which writes to a hosts file.
 - When `preserveFormatting` is true, this space is used for **added** parts.
   - See [this example](./examples.md#preserve-separatorparts) for reference
 - Must match `/^[ \t]+$/`
+
+<br />
 
 ## separatorHostname
 
